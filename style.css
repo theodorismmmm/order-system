@@ -1,14 +1,330 @@
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #1e293b;
+  --muted: #64748b;
+  --radius: 10px;
+  --shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial;
-  padding: 40px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
 }
 
+/* ── Header ── */
+.page-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.page-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.header-badge {
+  background: rgba(255,255,255,0.2);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ── Layout ── */
+.page-content {
+  max-width: 700px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.card h2 {
+  margin: 0 0 16px 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card h2 .icon {
+  font-size: 1.1rem;
+}
+
+/* ── Form groups ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.form-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
 input {
-  margin: 5px;
-  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color 0.15s;
+  width: 100%;
+}
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
 }
 
-button {
-  padding: 8px 12px;
-  margin: 5px;
+/* ── Buttons ── */
+button, .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
 }
+button:disabled, .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-primary, button {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover, button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+.btn-secondary {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--border);
+}
+.btn-success {
+  background: var(--success);
+  color: #fff;
+}
+.btn-success:hover:not(:disabled) {
+  background: #15803d;
+}
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* ── Login section ── */
+#loginSection {
+  max-width: 400px;
+  margin: 80px auto;
+}
+#loginSection .card {
+  padding: 32px;
+}
+#loginSection h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin: 0 0 24px 0;
+}
+.login-subtitle {
+  text-align: center;
+  color: var(--muted);
+  margin: -16px 0 20px 0;
+  font-size: 0.875rem;
+}
+
+/* ── Status messages ── */
+.status-msg {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 10px;
+  display: none;
+}
+.status-msg.success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  display: block;
+}
+.status-msg.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  display: block;
+}
+.status-msg.info {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  display: block;
+}
+
+/* ── Steps list ── */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+.step-item:hover {
+  background: #f1f5f9;
+}
+.step-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--success);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.step-item.completed .step-label {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+.step-label {
+  flex: 1;
+}
+
+/* ── Tracking page ── */
+.track-header {
+  text-align: center;
+  padding: 48px 16px 24px;
+}
+.track-header h1 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin: 0 0 8px 0;
+}
+.track-header p {
+  color: var(--muted);
+  margin: 0;
+}
+.track-search {
+  display: flex;
+  gap: 8px;
+  max-width: 480px;
+  margin: 0 auto 32px;
+  padding: 0 16px;
+}
+.track-search input {
+  flex: 1;
+}
+
+#result {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+.order-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.track-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.track-step .step-icon {
+  font-size: 1.2rem;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.track-step.done {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+.track-step.done .step-label {
+  color: #166534;
+}
+.track-notes {
+  margin-top: 20px;
+}
+.track-notes h3 {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.note-item {
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #fffbeb;
+  border-left: 3px solid var(--warning);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.not-found {
+  text-align: center;
+  color: var(--muted);
+  padding: 48px 0;
+  font-size: 1rem;
+}
+

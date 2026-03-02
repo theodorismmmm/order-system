@@ -1,35 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<h1>Admin Panel</h1>
+<!-- Login Screen -->
+<div id="loginSection">
+  <div class="card">
+    <h1>🛠️ Order System</h1>
+    <p class="login-subtitle">Sign in to access the admin panel</p>
+    <div class="form-group">
+      <input type="email" id="loginEmail" placeholder="Email address">
+      <input type="password" id="loginPassword" placeholder="Password">
+      <button onclick="login()">Sign In</button>
+      <div id="loginStatus" class="status-msg"></div>
+    </div>
+  </div>
+</div>
 
-<button onclick="login()">Login</button>
+<!-- Admin Panel (hidden until logged in) -->
+<div id="adminPanel" style="display:none">
+  <div class="page-header">
+    <span style="font-size:1.3rem">🛠️</span>
+    <h1>Admin Panel</h1>
+    <span class="header-badge">Order System</span>
+    <div style="margin-left:auto">
+      <button class="btn-secondary" style="background:rgba(255,255,255,0.15);color:#fff;border:none" onclick="logout()">Sign Out</button>
+    </div>
+  </div>
 
-<h2>Create Order</h2>
-<input id="newOrderId" placeholder="Order ID">
-<button onclick="createOrder()">Create</button>
+  <div class="page-content">
 
-<h2>Add Step</h2>
-<input id="stepOrderId" placeholder="Order ID">
-<input id="stepName" placeholder="Step name">
-<button onclick="addStep()">Add Step</button>
+    <!-- Create Order -->
+    <div class="card">
+      <h2><span class="icon">📦</span> Create Order</h2>
+      <div class="form-group">
+        <div class="form-row">
+          <input type="text" id="newOrderId" placeholder="Order ID (e.g. ORD-001)">
+          <button onclick="createOrder()">Create Order</button>
+        </div>
+        <div id="createOrderStatus" class="status-msg"></div>
+      </div>
+    </div>
 
-<h2>Toggle Step</h2>
-<input id="toggleOrderId" placeholder="Order ID">
-<button onclick="loadSteps()">Load Steps</button>
-<div id="steps"></div>
+    <!-- Add Step -->
+    <div class="card">
+      <h2><span class="icon">➕</span> Add Step</h2>
+      <div class="form-group">
+        <div class="form-row">
+          <input type="text" id="stepOrderId" placeholder="Order ID">
+          <input type="text" id="stepName" placeholder="Step name (e.g. Shipped)">
+        </div>
+        <button onclick="addStep()" style="align-self:flex-start">Add Step</button>
+        <div id="addStepStatus" class="status-msg"></div>
+      </div>
+    </div>
 
-<h2>Add Note</h2>
-<input id="noteOrderId" placeholder="Order ID">
-<input id="noteText" placeholder="Note">
-<button onclick="addNote()">Add Note</button>
+    <!-- Toggle Steps -->
+    <div class="card">
+      <h2><span class="icon">✅</span> Manage Steps</h2>
+      <div class="form-group">
+        <div class="form-row">
+          <input type="text" id="toggleOrderId" placeholder="Order ID">
+          <button onclick="loadSteps()">Load Steps</button>
+        </div>
+        <div id="stepsStatus" class="status-msg"></div>
+        <div id="steps" class="steps-list"></div>
+      </div>
+    </div>
+
+    <!-- Add Note -->
+    <div class="card">
+      <h2><span class="icon">📝</span> Add Note</h2>
+      <div class="form-group">
+        <div class="form-row">
+          <input type="text" id="noteOrderId" placeholder="Order ID">
+          <input type="text" id="noteText" placeholder="Note text">
+        </div>
+        <button onclick="addNote()" style="align-self:flex-start">Add Note</button>
+        <div id="addNoteStatus" class="status-msg"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <script src="app.js"></script>
 </body>
 </html>
+
