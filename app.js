@@ -238,7 +238,7 @@ async function loadSteps() {
     .map(
       step => `
         <label class="step-row">
-          <input type="checkbox" ${step.completed ? "checked" : ""} onchange="toggleStep('${step.id}', this.checked)">
+          <input type="checkbox" ${step.completed ? "checked" : ""} onchange="toggleStep(${JSON.stringify(step.id)}, this.checked)">
           <div>
             <strong>${escapeHtml(step.step_name)}</strong>
             <div class="muted small">${step.completed ? "Completed" : "Pending"}</div>
