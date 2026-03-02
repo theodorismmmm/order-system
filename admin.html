@@ -6,30 +6,113 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+  <div class="page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Admin tools</p>
+        <h1>Order Management</h1>
+        <p class="muted">Sign in, create orders, add steps, toggle completion, and attach notes without leaving the page.</p>
+      </div>
+      <div class="badge">Supabase</div>
+    </header>
 
-<h1>Admin Panel</h1>
+    <div id="adminMessage" class="notice notice-muted" role="status" aria-live="polite"></div>
 
-<button onclick="login()">Login</button>
+    <section class="grid">
+      <article class="card">
+        <header class="card-header">
+          <div>
+            <p class="eyebrow">Authenticate</p>
+            <h2>Login</h2>
+          </div>
+          <span class="pill">Required once per session</span>
+        </header>
+        <div class="field">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" type="email" placeholder="admin@example.com">
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password" placeholder="••••••••">
+        </div>
+        <div class="actions">
+          <button class="primary" onclick="login()">Login</button>
+        </div>
+      </article>
 
-<h2>Create Order</h2>
-<input id="newOrderId" placeholder="Order ID">
-<button onclick="createOrder()">Create</button>
+      <article class="card">
+        <header class="card-header">
+          <div>
+            <p class="eyebrow">Orders</p>
+            <h2>Create Order</h2>
+          </div>
+        </header>
+        <div class="field">
+          <label for="newOrderId">Order ID</label>
+          <input id="newOrderId" placeholder="ORD-00123">
+        </div>
+        <div class="actions">
+          <button class="primary" onclick="createOrder()">Create order</button>
+        </div>
+      </article>
 
-<h2>Add Step</h2>
-<input id="stepOrderId" placeholder="Order ID">
-<input id="stepName" placeholder="Step name">
-<button onclick="addStep()">Add Step</button>
+      <article class="card">
+        <header class="card-header">
+          <div>
+            <p class="eyebrow">Steps</p>
+            <h2>Add Step</h2>
+          </div>
+        </header>
+        <div class="field">
+          <label for="stepOrderId">Order ID</label>
+          <input id="stepOrderId" placeholder="ORD-00123">
+        </div>
+        <div class="field">
+          <label for="stepName">Step name</label>
+          <input id="stepName" placeholder="Package shipped">
+        </div>
+        <div class="actions">
+          <button class="secondary" onclick="addStep()">Add step</button>
+        </div>
+      </article>
 
-<h2>Toggle Step</h2>
-<input id="toggleOrderId" placeholder="Order ID">
-<button onclick="loadSteps()">Load Steps</button>
-<div id="steps"></div>
+      <article class="card full">
+        <header class="card-header">
+          <div>
+            <p class="eyebrow">Progress</p>
+            <h2>Toggle Steps</h2>
+            <p class="muted small">Load steps for an order and mark them complete as they move forward.</p>
+          </div>
+          <div class="inline">
+            <input id="toggleOrderId" placeholder="ORD-00123">
+            <button class="ghost" onclick="loadSteps()">Load steps</button>
+          </div>
+        </header>
+        <div id="steps" class="stack muted small">Steps will appear here after loading an order.</div>
+      </article>
 
-<h2>Add Note</h2>
-<input id="noteOrderId" placeholder="Order ID">
-<input id="noteText" placeholder="Note">
-<button onclick="addNote()">Add Note</button>
+      <article class="card">
+        <header class="card-header">
+          <div>
+            <p class="eyebrow">Notes</p>
+            <h2>Add Note</h2>
+          </div>
+        </header>
+        <div class="field">
+          <label for="noteOrderId">Order ID</label>
+          <input id="noteOrderId" placeholder="ORD-00123">
+        </div>
+        <div class="field">
+          <label for="noteText">Note</label>
+          <input id="noteText" placeholder="Add delivery context">
+        </div>
+        <div class="actions">
+          <button class="secondary" onclick="addNote()">Add note</button>
+        </div>
+      </article>
+    </section>
+  </div>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
