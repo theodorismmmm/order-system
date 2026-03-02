@@ -6,14 +6,28 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+  <div class="page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Live status</p>
+        <h1>Track your order</h1>
+        <p class="muted">Check the progress of your order and review any notes from the team.</p>
+      </div>
+      <div class="badge badge-soft">Customer view</div>
+    </header>
 
-<h1>Track Your Order</h1>
+    <section class="card">
+      <div class="field inline">
+        <label class="sr-only" for="orderInput">Order ID</label>
+        <input id="orderInput" placeholder="Enter your Order ID">
+        <button class="primary" onclick="trackOrder()">Track</button>
+      </div>
+      <p class="muted small">Use the order ID shared in your confirmation email.</p>
+    </section>
 
-<input id="orderInput" placeholder="Enter Order ID">
-<button onclick="trackOrder()">Track</button>
+    <section id="result" class="stack"></section>
+  </div>
 
-<div id="result"></div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
