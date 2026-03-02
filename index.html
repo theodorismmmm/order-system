@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Track Order</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<h1>Track Your Order</h1>
+<div class="track-header">
+  <h1>📦 Track Your Order</h1>
+  <p>Enter your order ID below to see real-time status updates</p>
+</div>
 
-<input id="orderInput" placeholder="Enter Order ID">
-<button onclick="trackOrder()">Track</button>
+<div class="track-search">
+  <input type="text" id="orderInput" placeholder="Order ID (e.g. ORD-001)">
+  <button onclick="trackOrder()">Track</button>
+</div>
 
 <div id="result"></div>
 
 <script src="app.js"></script>
 </body>
 </html>
+
