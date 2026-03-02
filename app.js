@@ -66,6 +66,17 @@ async function trackOrder() {
 
   if (!ensureSupabase(true)) return
 
+  const { data: order } = await supabaseClient
+    .from("orders")
+    .select("order_id")
+    .eq("order_id", orderId)
+    .maybeSingle()
+
+  if (!order) {
+    resultDiv.innerHTML = `<div class="notice notice-info">Order not found.</div>`
+    return
+  }
+
   const { data: steps } = await supabaseClient
     .from("order_steps")
     .select("*")
@@ -78,14 +89,11 @@ async function trackOrder() {
     .eq("order_id", orderId)
     .order("created_at")
 
-  if (!steps || steps.length === 0) {
-    resultDiv.innerHTML = `<div class="notice notice-info">Order not found.</div>`
-    return
-  }
-
-  const stepsList = steps
-    .map(
-      step => `
+  const stepsList =
+    steps && steps.length > 0
+      ? steps
+          .map(
+            step => `
         <div class="step-row">
           <span class="status-chip ${step.completed ? "complete" : ""}">
             ${step.completed ? "Done" : "Open"}
@@ -93,8 +101,10 @@ async function trackOrder() {
           <span>${escapeHtml(step.step_name)}</span>
         </div>
       `
-    )
-    .join("")
+          )
+          .join("")
+      : `<p class="muted small">No steps yet for this order.</p>`
+
 
   const notesList =
     notes && notes.length > 0
