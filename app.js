@@ -238,7 +238,7 @@ async function loadSteps() {
     .map(
       step => `
         <label class="step-row">
-          <input type="checkbox" ${step.completed ? "checked" : ""} onchange="toggleStep(${JSON.stringify(step.id)}, this.checked)">
+          <input type="checkbox" data-step-id="${escapeHtml(step.id)}" aria-label="Toggle ${escapeHtml(step.step_name)}" ${step.completed ? "checked" : ""} onchange="toggleStepFromCheckbox(this)">
           <div>
             <strong>${escapeHtml(step.step_name)}</strong>
             <div class="muted small">${step.completed ? "Completed" : "Pending"}</div>
@@ -247,6 +247,12 @@ async function loadSteps() {
       `
     )
     .join("")
+}
+
+function toggleStepFromCheckbox(el) {
+  if (!el) return
+  const stepId = el.dataset.stepId
+  toggleStep(stepId, el.checked)
 }
 
 async function toggleStep(id, nextState) {
