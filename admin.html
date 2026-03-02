@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
 
+<h1>Admin Panel</h1>
+
+<button onclick="login()">Login</button>
+
+<h2>Create Order</h2>
+<input id="newOrderId" placeholder="Order ID">
+<button onclick="createOrder()">Create</button>
+
+<h2>Add Step</h2>
+<input id="stepOrderId" placeholder="Order ID">
+<input id="stepName" placeholder="Step name">
+<button onclick="addStep()">Add Step</button>
+
+<h2>Toggle Step</h2>
+<input id="toggleOrderId" placeholder="Order ID">
+<button onclick="loadSteps()">Load Steps</button>
+<div id="steps"></div>
+
+<h2>Add Note</h2>
+<input id="noteOrderId" placeholder="Order ID">
+<input id="noteText" placeholder="Note">
+<button onclick="addNote()">Add Note</button>
+
+<script src="app.js"></script>
+</body>
+</html>
