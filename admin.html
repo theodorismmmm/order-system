@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Panel</title>
+  <meta charset="UTF-8">
+  <title>Admin-Panel</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -9,9 +10,9 @@
   <div class="page">
     <header class="page-header">
       <div>
-        <p class="eyebrow">Admin tools</p>
-        <h1>Order Management</h1>
-        <p class="muted">Sign in, create orders, add steps, toggle completion, and attach notes without leaving the page.</p>
+        <p class="eyebrow">Admin-Tools</p>
+        <h1>Bestellungsverwaltung</h1>
+        <p class="muted">Anmelden, Bestellungen erstellen, Schritte hinzufügen, Abschluss umschalten und Notizen anfügen, ohne die Seite zu verlassen.</p>
       </div>
       <div class="badge">Supabase</div>
     </header>
@@ -22,92 +23,92 @@
       <article class="card">
         <header class="card-header">
           <div>
-            <p class="eyebrow">Authenticate</p>
-            <h2>Login</h2>
+            <p class="eyebrow">Authentifizierung</p>
+            <h2>Anmelden</h2>
           </div>
-          <span class="pill">Required once per session</span>
+          <span class="pill">Einmalig pro Sitzung erforderlich</span>
         </header>
         <div class="field">
-          <label for="loginEmail">Email</label>
-          <input id="loginEmail" type="email" placeholder="admin@example.com">
+          <label for="loginEmail">E-Mail</label>
+          <input id="loginEmail" type="email" placeholder="admin@beispiel.de">
         </div>
         <div class="field">
-          <label for="loginPassword">Password</label>
+          <label for="loginPassword">Passwort</label>
           <input id="loginPassword" type="password" placeholder="••••••••">
         </div>
         <div class="actions">
-          <button class="primary" onclick="login()">Login</button>
+          <button class="primary" onclick="login()">Anmelden</button>
         </div>
       </article>
 
       <article class="card">
         <header class="card-header">
           <div>
-            <p class="eyebrow">Orders</p>
-            <h2>Create Order</h2>
+            <p class="eyebrow">Bestellungen</p>
+            <h2>Bestellung erstellen</h2>
           </div>
         </header>
         <div class="field">
-          <label for="newOrderId">Order ID</label>
+          <label for="newOrderId">Bestell-ID</label>
           <input id="newOrderId" placeholder="ORD-00123">
         </div>
         <div class="actions">
-          <button class="primary" onclick="createOrder()">Create order</button>
+          <button class="primary" onclick="createOrder()">Bestellung erstellen</button>
         </div>
       </article>
 
       <article class="card">
         <header class="card-header">
           <div>
-            <p class="eyebrow">Steps</p>
-            <h2>Add Step</h2>
+            <p class="eyebrow">Schritte</p>
+            <h2>Schritt hinzufügen</h2>
           </div>
         </header>
         <div class="field">
-          <label for="stepOrderId">Order ID</label>
+          <label for="stepOrderId">Bestell-ID</label>
           <input id="stepOrderId" placeholder="ORD-00123">
         </div>
         <div class="field">
-          <label for="stepName">Step name</label>
-          <input id="stepName" placeholder="Package shipped">
+          <label for="stepName">Schrittname</label>
+          <input id="stepName" placeholder="Paket versendet">
         </div>
         <div class="actions">
-          <button class="secondary" onclick="addStep()">Add step</button>
+          <button class="secondary" onclick="addStep()">Schritt hinzufügen</button>
         </div>
       </article>
 
       <article class="card full">
         <header class="card-header">
           <div>
-            <p class="eyebrow">Progress</p>
-            <h2>Toggle Steps</h2>
-            <p class="muted small">Load steps for an order and mark them complete as they move forward.</p>
+            <p class="eyebrow">Fortschritt</p>
+            <h2>Schritte umschalten</h2>
+            <p class="muted small">Lade Schritte für eine Bestellung und markiere sie als erledigt.</p>
           </div>
           <div class="inline">
             <input id="toggleOrderId" placeholder="ORD-00123">
-            <button class="ghost" onclick="loadSteps()">Load steps</button>
+            <button class="ghost" onclick="loadSteps()">Schritte laden</button>
           </div>
         </header>
-        <div id="steps" class="stack muted small">Steps will appear here after loading an order.</div>
+        <div id="steps" class="stack muted small">Schritte erscheinen hier nach dem Laden einer Bestellung.</div>
       </article>
 
       <article class="card">
         <header class="card-header">
           <div>
-            <p class="eyebrow">Notes</p>
-            <h2>Add Note</h2>
+            <p class="eyebrow">Notizen</p>
+            <h2>Notiz hinzufügen</h2>
           </div>
         </header>
         <div class="field">
-          <label for="noteOrderId">Order ID</label>
+          <label for="noteOrderId">Bestell-ID</label>
           <input id="noteOrderId" placeholder="ORD-00123">
         </div>
         <div class="field">
-          <label for="noteText">Note</label>
-          <input id="noteText" placeholder="Add delivery context">
+          <label for="noteText">Notiz</label>
+          <input id="noteText" placeholder="Lieferkontext hinzufügen">
         </div>
         <div class="actions">
-          <button class="secondary" onclick="addNote()">Add note</button>
+          <button class="secondary" onclick="addNote()">Notiz hinzufügen</button>
         </div>
       </article>
     </section>

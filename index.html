@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Track Order</title>
+  <meta charset="UTF-8">
+  <title>Bestellung verfolgen</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <div class="page">
-    <header class="page-header">
-      <div>
-        <p class="eyebrow">Live status</p>
-        <h1>Track your order</h1>
-        <p class="muted">Check the progress of your order and review any notes from the team.</p>
+  <div class="page tracking-page">
+    <div class="tracking-hero">
+      <p class="eyebrow">Live-Status</p>
+      <h1>Bestellung verfolgen</h1>
+      <p class="muted">Gib deinen Tracking-Code ein, um den aktuellen Status deiner Bestellung zu sehen.</p>
+      <div class="tracking-input-wrap">
+        <label class="sr-only" for="orderInput">Tracking-Code</label>
+        <input id="orderInput" class="tracking-input" placeholder="Tracking-Code eingeben" autocomplete="off" onkeydown="if(event.key==='Enter') trackOrder()">
+        <button class="primary tracking-btn" onclick="trackOrder()">Verfolgen</button>
       </div>
-      <div class="badge badge-soft">Customer view</div>
-    </header>
-
-    <section class="card">
-      <div class="field inline">
-        <label class="sr-only" for="orderInput">Order ID</label>
-        <input id="orderInput" placeholder="Enter your Order ID">
-        <button class="primary" onclick="trackOrder()">Track</button>
-      </div>
-      <p class="muted small">Use the order ID shared in your confirmation email.</p>
-    </section>
+    </div>
 
     <section id="result" class="stack"></section>
   </div>

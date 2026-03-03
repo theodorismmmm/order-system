@@ -5,7 +5,7 @@ const supabaseClient = window.supabase?.createClient(supabaseUrl, supabaseKey) |
 
 function ensureSupabase(forPublic = false) {
   if (supabaseClient) return true
-  const message = "Unable to load Supabase client. Please refresh and ensure the CDN is accessible."
+  const message = "Supabase-Client konnte nicht geladen werden. Bitte die Seite neu laden und sicherstellen, dass das CDN erreichbar ist."
   if (forPublic) {
     const resultDiv = document.getElementById("result")
     if (resultDiv) resultDiv.innerHTML = `<div class="notice notice-error">${escapeHtml(message)}</div>`
@@ -58,11 +58,11 @@ async function trackOrder() {
   resultDiv.innerHTML = ""
 
   if (!orderId) {
-    resultDiv.innerHTML = `<div class="notice notice-error">Please enter an order ID.</div>`
+    resultDiv.innerHTML = `<div class="notice notice-error">Bitte gib einen Tracking-Code ein.</div>`
     return
   }
 
-  resultDiv.innerHTML = `<div class="result-card">Loading order...</div>`
+  resultDiv.innerHTML = `<div class="result-card">Bestellung wird geladen…</div>`
 
   if (!ensureSupabase(true)) return
 
@@ -73,7 +73,7 @@ async function trackOrder() {
     .maybeSingle()
 
   if (!order) {
-    resultDiv.innerHTML = `<div class="notice notice-info">Order not found.</div>`
+    resultDiv.innerHTML = `<div class="notice notice-info">Bestellung nicht gefunden.</div>`
     return
   }
 
@@ -91,19 +91,17 @@ async function trackOrder() {
 
   const stepsList =
     steps && steps.length > 0
-      ? steps
+      ? `<div class="progress-steps">${steps
           .map(
             step => `
-        <div class="step-row">
-          <span class="status-chip ${step.completed ? "complete" : ""}">
-            ${step.completed ? "Done" : "Open"}
-          </span>
-          <span>${escapeHtml(step.step_name)}</span>
+        <div class="progress-step ${step.completed ? "done" : ""}">
+          <div class="step-icon" aria-hidden="true">${step.completed ? "✓" : ""}</div>
+          <span class="step-label">${escapeHtml(step.step_name)}</span>
         </div>
       `
           )
-          .join("")
-      : `<p class="muted small">No steps yet for this order.</p>`
+          .join("")}</div>`
+      : `<p class="muted small">Noch keine Schritte für diese Bestellung.</p>`
 
 
   const notesList =
@@ -117,20 +115,20 @@ async function trackOrder() {
             `
           )
           .join("")
-      : `<p class="muted small">No notes yet for this order.</p>`
+      : `<p class="muted small">Noch keine Notizen für diese Bestellung.</p>`
 
   resultDiv.innerHTML = `
     <div class="result-card stack">
       <div>
-        <p class="eyebrow">Order</p>
+        <p class="eyebrow">Bestellung</p>
         <h2>${escapeHtml(orderId)}</h2>
       </div>
       <div class="stack">
-        <p class="eyebrow">Steps</p>
+        <p class="eyebrow">Fortschritt</p>
         ${stepsList}
       </div>
       <div class="stack">
-        <p class="eyebrow">Notes</p>
+        <p class="eyebrow">Notizen</p>
         ${notesList}
       </div>
     </div>
@@ -146,11 +144,11 @@ async function login() {
   const password = document.getElementById("loginPassword")?.value || prompt("Password")
 
   if (!email || !password) {
-    setNotice("Email and password are required.", "error")
+    setNotice("E-Mail und Passwort sind erforderlich.", "error")
     return
   }
 
-  setNotice("Signing in...", "info")
+  setNotice("Anmeldung läuft…", "info")
 
   if (!ensureSupabase()) return
 
@@ -164,14 +162,14 @@ async function login() {
     return
   }
 
-  setNotice("Logged in successfully.", "success")
+  setNotice("Erfolgreich angemeldet.", "success")
 }
 
 async function createOrder() {
   const orderId = document.getElementById("newOrderId")?.value.trim()
 
   if (!orderId) {
-    setNotice("Order ID is required.", "error")
+    setNotice("Bestell-ID ist erforderlich.", "error")
     return
   }
 
@@ -186,7 +184,7 @@ async function createOrder() {
     return
   }
 
-  setNotice("Order created.", "success")
+  setNotice("Bestellung erstellt.", "success")
 }
 
 async function addStep() {
@@ -194,7 +192,7 @@ async function addStep() {
   const stepName = document.getElementById("stepName")?.value.trim()
 
   if (!orderId || !stepName) {
-    setNotice("Order ID and step name are required.", "error")
+    setNotice("Bestell-ID und Schrittname sind erforderlich.", "error")
     return
   }
 
@@ -210,18 +208,18 @@ async function addStep() {
     return
   }
 
-  setNotice("Step added.", "success")
+  setNotice("Schritt hinzugefügt.", "success")
 }
 
 async function loadSteps() {
   const orderId = document.getElementById("toggleOrderId")?.value.trim()
   const stepsDiv = document.getElementById("steps")
 
-  stepsDiv.innerHTML = `<p class="muted small">Loading steps...</p>`
+  stepsDiv.innerHTML = `<p class="muted small">Schritte werden geladen…</p>`
 
   if (!orderId) {
-    setNotice("Enter an order ID to load steps.", "error")
-    stepsDiv.innerHTML = `<p class="notice notice-error">Order ID required.</p>`
+    setNotice("Bestell-ID eingeben, um Schritte zu laden.", "error")
+    stepsDiv.innerHTML = `<p class="notice notice-error">Bestell-ID erforderlich.</p>`
     return
   }
 
@@ -240,7 +238,7 @@ async function loadSteps() {
   }
 
   if (!steps || steps.length === 0) {
-    stepsDiv.innerHTML = `<p class="muted small">No steps for this order yet.</p>`
+    stepsDiv.innerHTML = `<p class="muted small">Noch keine Schritte für diese Bestellung.</p>`
     return
   }
 
@@ -248,10 +246,10 @@ async function loadSteps() {
     .map(
       step => `
         <label class="step-row">
-          <input type="checkbox" data-step-id="${escapeHtml(step.id)}" aria-label="Toggle ${escapeHtml(step.step_name)}" ${step.completed ? "checked" : ""} onchange="toggleStepFromCheckbox(this)">
+          <input type="checkbox" data-step-id="${escapeHtml(step.id)}" aria-label="Schritt: ${escapeHtml(step.step_name)}" ${step.completed ? "checked" : ""} onchange="toggleStepFromCheckbox(this)">
           <div>
             <strong>${escapeHtml(step.step_name)}</strong>
-            <div class="muted small">${step.completed ? "Completed" : "Pending"}</div>
+            <div class="muted small">${step.completed ? "Abgeschlossen" : "Ausstehend"}</div>
           </div>
         </label>
       `
@@ -278,7 +276,7 @@ async function toggleStep(id, nextState) {
     return
   }
 
-  setNotice("Step updated.", "success")
+  setNotice("Schritt aktualisiert.", "success")
   loadSteps()
 }
 
@@ -287,7 +285,7 @@ async function addNote() {
   const noteText = document.getElementById("noteText")?.value.trim()
 
   if (!orderId || !noteText) {
-    setNotice("Order ID and note are required.", "error")
+    setNotice("Bestell-ID und Notiz sind erforderlich.", "error")
     return
   }
 
@@ -303,5 +301,5 @@ async function addNote() {
     return
   }
 
-  setNotice("Note added.", "success")
+  setNotice("Notiz hinzugefügt.", "success")
 }
